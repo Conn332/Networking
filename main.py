@@ -39,7 +39,7 @@ while working:
         elif cmd == "echo":
             in_q.put(' '.join(inp[1:]).encode('utf-8'))
         elif cmd == "update":
-            eval("git pull network master")
+            os.system("git pull network master")
             os.execv(sys.executable, ['python'] + sys.argv)
         else:
             if inp[0] in running.keys():
