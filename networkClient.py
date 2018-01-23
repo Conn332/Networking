@@ -30,6 +30,7 @@ class client(threading.Thread):
                 self.join()
             totalsent += sent
             print("sent: ",msg[:totalsent])
+
     def receive(self):
         chunks = b''
         try:
@@ -39,7 +40,6 @@ class client(threading.Thread):
             pass
         except ConnectionAbortedError:
             print("Connection Aborted. Shutting Down thread.")
-            self.socket.close()
             self.stop.set()
         except:
             raise
@@ -53,7 +53,6 @@ class client(threading.Thread):
                     data = None
                 except ConnectionAbortedError:
                     print("Connection Aborted. Shutting Down thread.")
-                    self.socket.close()
                     self.stop.set()
                 except:
                     raise
@@ -68,12 +67,10 @@ class client(threading.Thread):
             return True
         except ConnectionAbortedError:
             print("Connection Aborted. Shutting Down thread.")
-            self.socket.close()
             self.stop.set()
             return False
         except:
             raise
     def join(self, timeout = None):
-        self.stop.set()
         super().join(timeout)
-        self.socket.close()
+        self.stop.set()
