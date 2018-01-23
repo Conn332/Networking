@@ -42,8 +42,8 @@ while working:
             in_q.put(' '.join(inp[1:]).encode('utf-8'))
         elif cmd == "update":
             os.system("git pull network master")
-            restart = True
             working = False
+            in_q.put(b"Manual Update Required.")
         else:
             if inp[0] in running.keys():
                 print(inp[0]+" already running")
@@ -54,8 +54,3 @@ while working:
 for thread in running:
     thread.join()
 server.join()
-
-print(server.isAlive())
-
-if restart:
-    os.execv("/home/pi/LEDStrip/main.py", [''])
