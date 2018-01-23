@@ -20,7 +20,7 @@ class checkOutput(threading.Thread):
         super().__init__()
     def run(self):
         while not self.stop.isSet():
-            while not self.queue.empt():
+            while not self.queue.empty():
                 print("Output: ",queue.get().decode('utf-8'))
     def join(self, timeout = None):
         super().join(timeout)
