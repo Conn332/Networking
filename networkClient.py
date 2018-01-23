@@ -75,5 +75,5 @@ class client(threading.Thread):
             raise
     def join(self, timeout = None):
         self.stop.set()
-        self.socket.close()
         super().join(timeout)
+        self.socket.close()
