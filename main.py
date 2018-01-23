@@ -5,6 +5,7 @@ import networkServer
 import networkClient
 import queue
 import socket
+import sys
 
 in_q = queue.Queue()
 out_q = queue.Queue()
@@ -37,6 +38,9 @@ while working:
             working = False
         elif cmd == "echo":
             in_q.put(' '.join(inp[1:]).encode('utf-8'))
+        elif cmd == "update":
+            eval("git pull network master")
+            os.execv(sys.executable, ['python'] + sys.argv)
         else:
             if inp[0] in running.keys():
                 print(inp[0]+" already running")
