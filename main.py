@@ -14,6 +14,8 @@ server.start()
 
 working = True
 
+restart = False
+
 running = {}
 while working:
     if not out_q.empty():
@@ -40,7 +42,7 @@ while working:
             in_q.put(' '.join(inp[1:]).encode('utf-8'))
         elif cmd == "update":
             os.system("git pull network master")
-            os.execv(sys.executable, ['python'] + sys.argv)
+            working = False
         else:
             if inp[0] in running.keys():
                 print(inp[0]+" already running")
@@ -51,3 +53,6 @@ while working:
 for thread in running:
     thread.join()
 server.join()
+
+if restart:
+    os.execv(sys.executable, ['python'] + sys.argv)
