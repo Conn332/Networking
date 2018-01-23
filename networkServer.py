@@ -52,9 +52,9 @@ class server(threading.Thread):
 
     def join(self):
         self.stop.set()
-        self.socket.close()
         for key in self.connections.keys():
             self.connections[key].join()
+        self.socket.close()
         super().join()
 #inq = queue.Queue()
 #outq = queue.Queue()
