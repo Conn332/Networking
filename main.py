@@ -41,7 +41,7 @@ while working:
         elif cmd == "echo":
             in_q.put(' '.join(inp[1:]).encode('utf-8'))
         elif cmd == "update":
-            os.system("git pull network master")
+            os.system("git pull --rebase network master")
             working = False
             in_q.put(b"Manual Update Required.")
         else:
