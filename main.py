@@ -55,5 +55,7 @@ for thread in running:
     thread.join()
 server.join()
 
+print(server.isAlive())
+
 if restart:
     os.execv("/home/pi/LEDStrip/main.py", [''])
