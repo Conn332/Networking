@@ -4,7 +4,7 @@ import networkClient
 import queue
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect(("localhost",10000))
+s.connect(("10.0.3.165",10000))
 
 
 inq = queue.Queue()
