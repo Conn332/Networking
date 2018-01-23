@@ -55,4 +55,4 @@ for thread in running:
 server.join()
 
 if restart:
-    os.execv(sys.executable, ['python'] + sys.argv)
+    os.execv("/home/pi/LEDStrip/main.py", [''])
