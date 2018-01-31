@@ -55,7 +55,7 @@ class server(threading.Thread):
         for key in self.connections.keys():
             self.connections[key].join()
         self.socket.close()
-        super.join()
+        super().join()
 #inq = queue.Queue()
 #outq = queue.Queue()
 #s = server(inq, outq)
