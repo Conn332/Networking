@@ -40,4 +40,4 @@ while cmd != "":
     cmd = input()
 if c.isAlive():
     c.join()
-client.join()
+client.join(timeout = 1)
