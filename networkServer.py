@@ -50,12 +50,12 @@ class server(threading.Thread):
                 self.connections[clAddress].start()
                 print(len(self.connections.keys()))
 
-    def join(self):
+    def join(self, timeout = None):
         self.stop.set()
         for key in self.connections.keys():
             self.connections[key].join()
         self.socket.close()
-        super().join()
+        super().join(timeout)
 #inq = queue.Queue()
 #outq = queue.Queue()
 #s = server(inq, outq)

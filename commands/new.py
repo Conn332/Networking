@@ -11,9 +11,9 @@ class Hello(threading.Thread):
         while not self.stop.isSet():
             while not self.in_q.empty():
                 inp = self.in_q.get().split(" ")
-                self.pi.set_PWM_cycle(2,int(inp[0]))
-                self.pi.set_PWM_cycle(3,int(inp[1]))
-                self.pi.set_PWM_cycle(4,int(inp[2]))
+                self.pi.set_PWM_dutycycle(2,int(inp[0]))
+                self.pi.set_PWM_dutycycle(3,int(inp[1]))
+                self.pi.set_PWM_dutycycle(4,int(inp[2]))
                 self.out_q.put("set lights to R:"+inp[0]+" G:"+inp[1]+" B:"+inp[2])
     def join(self, timeout=None):
         self.stop.set()
