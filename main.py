@@ -17,7 +17,12 @@ working = True
 restart = False
 
 running = {}
+threadInQ = {}
+threadOutQ = {}
 while working:
+    for key in threadOutQ.keys():
+        while not threadOutQ[key].empty():
+            in_q.put(threadOutQ[key].get())
     if not out_q.empty():
         inp = out_q.get().decode('utf-8').split(' ')
         print(inp)
@@ -46,10 +51,12 @@ while working:
             in_q.put(b"Manual Update Required.")
         else:
             if inp[0] in running.keys():
-                print(inp[0]+" already running")
+                threadInQ[inp[0]].put(' '.join(inp[1:]))
             else:
                 imp = importlib.import_module("commands."+inp[0])
-                running[inp[0]] = getattr(imp,[i for i in dir(imp) if i[0] != "_"][0])()
+                threadInQ[inp[0]] = queue.Queue()
+                threadOutQ[inp[0]] = queue.Queue()
+                running[inp[0]] = getattr(imp,[i for i in dir(imp) if i[0] != "_"][0])(threadInQ[inp[0]],threadOutQ[inp[0]])
                 running[inp[0]].start()
 for thread in running:
     thread.join()

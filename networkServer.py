@@ -51,11 +51,11 @@ class server(threading.Thread):
                 print(len(self.connections.keys()))
 
     def join(self):
-        super().join()
         self.stop.set()
         for key in self.connections.keys():
             self.connections[key].join()
         self.socket.close()
+        super.join()
 #inq = queue.Queue()
 #outq = queue.Queue()
 #s = server(inq, outq)

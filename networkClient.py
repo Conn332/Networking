@@ -72,5 +72,5 @@ class client(threading.Thread):
         except:
             raise
     def join(self, timeout = None):
-        super().join(timeout)
         self.stop.set()
+        super().join(timeout)
