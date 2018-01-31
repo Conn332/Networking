@@ -58,6 +58,7 @@ while working:
                 threadOutQ[inp[0]] = queue.Queue()
                 running[inp[0]] = getattr(imp,[i for i in dir(imp) if i[0] != "_"][0])(threadInQ[inp[0]],threadOutQ[inp[0]])
                 running[inp[0]].start()
+                threadInQ[inp[0]].put(' '.join(inp[1:]))
 for thread in running:
     thread.join()
 server.join()

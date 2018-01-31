@@ -14,7 +14,7 @@ class Hello(threading.Thread):
                 self.pi.set_PWM_dutycycle(2,int(inp[0]))
                 self.pi.set_PWM_dutycycle(3,int(inp[1]))
                 self.pi.set_PWM_dutycycle(4,int(inp[2]))
-                self.out_q.put("set lights to R:"+inp[0]+" G:"+inp[1]+" B:"+inp[2])
+                self.out_q.put(("set lights to R:"+inp[0]+" G:"+inp[1]+" B:"+inp[2]).encode('utf-8'))
     def join(self, timeout=None):
         self.stop.set()
         super().join(timeout)
