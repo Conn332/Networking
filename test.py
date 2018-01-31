@@ -21,7 +21,7 @@ class checkOutput(threading.Thread):
     def run(self):
         while not self.stop.isSet():
             while not self.queue.empty():
-                print("Output: ",queue.get().decode('utf-8'))
+                print("Output: ",self.queue.get().decode('utf-8'))
     def join(self, timeout = None):
         super().join(timeout)
         self.stop.set()
